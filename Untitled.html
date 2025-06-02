@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;External Barcode Scanner&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://unpkg.com/html5-qrcode"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #f0f0f0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#reader {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 2px solid #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 4px 8px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#reader__dashboard_section_csr {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: none !important;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#reader__scan_region {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>min-height: 200px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #0056b3;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#result-section { /* Mengganti #result menjadi #result-section */</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #e9e9e9;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 480px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>word-wrap: break-word;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: none; /* Sembunyikan secara default */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.status-message {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.status-success {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #d4edda;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #155724;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #c3e6cb;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.status-error {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #f8d7da;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #721c24;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #f5c6cb;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.input-group {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.input-group label {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.input-group input {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: calc(100% - 20px);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #ccc;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.submit-button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #007bff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.1em;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 480px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.submit-button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #0056b3;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width: 600px) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>body { padding: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>#reader { width: 100%; border-radius: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.input-group input, .submit-button { width: 100%; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Barcode &amp; QR Scanner&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="reader"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="result-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="scanned-value-input"&gt;Barcode Value:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="scanned-value-input" readonly&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="product-name-input"&gt;Product Name:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="product-name-input" placeholder="e.g., Kemeja Biru"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="input-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="quantity-input"&gt;Quantity:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="quantity-input" value="1" min="1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="submit-button" onclick="sendDataToSheet()"&gt;Simpan ke Sheet&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="status-message" class="status-message" style="display: none;"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// GANTI DENGAN URL ENDPOINT API ANDA DARI LANGKAH SEBELUMNYA</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const GAS_WEB_APP_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let html5QrcodeScanner;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function onScanSuccess(decodedText, decodedResult) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>html5QrcodeScanner.pause(); // Jeda scanner setelah berhasil scan</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('scanned-value-input').value = decodedText;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('result-section').style.display = 'block'; // Tampilkan bagian input tambahan</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('product-name-input').focus(); // Fokus ke input nama produk</p>
+<p class="p1"><span class="Apple-converted-space">      </span>displayStatus('Barcode ditemukan! Silakan lengkapi data.', 'status-success');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function onScanError(errorMessage) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// console.warn(`Code scan error = ${errorMessage}`);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function displayStatus(message, className) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const statusDiv = document.getElementById('status-message');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>statusDiv.textContent = message;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>statusDiv.className = 'status-message ' + className;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>statusDiv.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function sendDataToSheet() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const barcodeValue = document.getElementById('scanned-value-input').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const productName = document.getElementById('product-name-input').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const quantity = document.getElementById('quantity-input').value;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!barcodeValue) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>displayStatus('Barcode belum dipindai!', 'status-error');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>displayStatus('Mengirim data...', '');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>fetch(GAS_WEB_APP_URL, {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>mode: 'no-cors', // Penting untuk menghindari masalah CORS. Artinya, kita tidak bisa membaca respons dari server.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>headers: {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>'Content-Type': 'application/json'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body: JSON.stringify({</p>
+<p class="p1"><span class="Apple-converted-space">          </span>barcode: barcodeValue,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>productName: productName,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>quantity: quantity</p>
+<p class="p1"><span class="Apple-converted-space">        </span>})</p>
+<p class="p1"><span class="Apple-converted-space">      </span>})</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.then(response =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Karena mode: 'no-cors', kita tidak bisa membaca response.json() secara langsung.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Kita hanya bisa berasumsi bahwa permintaan berhasil jika tidak ada error jaringan.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Pesan status akan menginformasikan pengguna untuk memeriksa Google Sheet.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>displayStatus('Data mungkin berhasil dikirim. Periksa Google Sheet.', 'status-success');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Reset form dan sembunyikan setelah dianggap terkirim</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('scanned-value-input').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('product-name-input').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('quantity-input').value = '1';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('result-section').style.display = 'none';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Lanjutkan scanning setelah data dianggap terkirim</p>
+<p class="p1"><span class="Apple-converted-space">        </span>html5QrcodeScanner.resume();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('status-message').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, 3000);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>})</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.catch(error =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>console.error('Error sending data:', error);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>displayStatus('Gagal mengirim data: ' + error.message, 'status-error');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('status-message').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, 5000);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.addEventListener('DOMContentLoaded', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>html5QrcodeScanner = new Html5QrcodeScanner(</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"reader",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">          </span>fps: 10,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>qrbox: { width: 250, height: 250 },</p>
+<p class="p1"><span class="Apple-converted-space">          </span>rememberLastUsedCamera: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>disableFlip: false,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>showTorchButtonIfSupported: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>showZoom: true,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>supportedScanTypes: [Html5QrcodeSupportedScanTypes.QR_CODE, Html5QrcodeSupportedScanTypes.CODE_128, Html5QrcodeSupportedScanTypes.EAN_13, Html5QrcodeSupportedScanTypes.EAN_8],</p>
+<p class="p1"><span class="Apple-converted-space">          </span>formatsToSupport: [</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.QR_CODE,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.CODE_128,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.EAN_13,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.EAN_8,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.CODE_39,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.Data_MATRIX,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.ITF,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.UPC_A,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.UPC_E,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.PDF_417,</p>
+<p class="p1"><span class="Apple-converted-space">              </span>Html5QrcodeSupportedFormats.AZTEC,</p>
+<p class="p1"><span class="Apple-converted-space">          </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* verbose= */ false</p>
+<p class="p1"><span class="Apple-converted-space">      </span>);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>html5QrcodeScanner.render(onScanSuccess, onScanError);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
